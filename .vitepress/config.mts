@@ -39,14 +39,14 @@ export default defineConfigWithTheme<ThemeConfig>({
       'link',
       {
         rel: 'stylesheet',
-        href: 'font/Blueaka/Blueaka.css',
+        href: '/docs-vite/font/Blueaka/Blueaka.css',
       },
     ],
     [
       'link',
       {
         rel: 'stylesheet',
-        href: 'font/Blueaka_Bold/Blueaka_Bold.css',
+        href: '/docs-vite/font/Blueaka_Bold/Blueaka_Bold.css',
       },
     ],
     // 图片灯箱
