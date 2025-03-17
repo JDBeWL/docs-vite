@@ -79,7 +79,7 @@ Scala语言的定义与Java、Python类似，但是并不能直接像Python可�
 
 即不允许以下代码实现：
 
-::: warninggit
+::: warning
 def getDetails(int x):<br/>
   return Details<br/>
 private String getDetails(){<br/>
