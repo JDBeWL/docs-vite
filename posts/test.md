@@ -13,7 +13,7 @@ head:
 
 # 测试样本
 
-## HiveSql表格式
+## HiveQL表
 ![Caption](../public/testhql.png)
 
 ## 这是阿露
@@ -42,55 +42,45 @@ f(x; \mu, \sigma^2) = \frac{1}{\sigma \sqrt{2\pi}} \, \exp\left( -\frac{(x - \mu
 :::
 
 ::: warning
-春天啊
+叫吧
 
-在哪里
+明知你从未试过挣扎
 
-献给她的
+只在私占叙事里深挖
 
-雪绒花
+展示伤疤
 
-没盼来
+简直同你一样廉价
 
-雪融化
+所有你不愿回想的夜晚复现
 
-在秋冬
+趁你习得无助的瞬间
 
-在春夏
+它缠绵于是哭着喊着盼着有一天
 
-逆着光
+遇见仅包容属于你的房间
 
-长芽
+以为路过便跨越时间
 
-冷却塔
+可时间会告诉你不会是这一幕的主演
 
-冷却他
+——《你的眼泪同你一样廉价》,停電前夜
 
-飞回南
-
-方去吧
-
-在来年
-
-忧郁的恒温
-
-陪你长大
-
-——《维多利亚》,TOPKINGCREAM
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=420 height=100 src="//music.163.com/outchain/player?type=2&id=2671839026&auto=0&height=66"></iframe>
 :::
 
 测试视频<br/>
 《初星学園, Kijibato, 花海咲季 - EGO》<br/>
-PCM封装的MKV源视频，<a href='/public/EGO.mkv' download='初星学園, Kijibato, 花海咲季 - EGO.mkv'>下载</a>
+PCM封装的MKV源视频，<a href='EGO.mkv' download='初星学園, Kijibato, 花海咲季 - EGO.mkv'>下载</a>
 ::: danger
-<video controls width="640" height="640">
+<video controls width="540" height="540">
   <source src="/public/EGO.mp4" type="video/mp4">
 </video>
 :::
 
 ::: details
 Never gonna give you up
-<a href="https://www.bilibili.com/video/BV1GJ411x7h7">展开</a>
+<a href="https://www.bilibili.com/video/BV1GJ411x7h7" >展开</a>
 :::
 
 ## 你需要在GregTech中做的三件事
