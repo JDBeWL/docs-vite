@@ -71,7 +71,7 @@ f(x; \mu, \sigma^2) = \frac{1}{\sigma \sqrt{2\pi}} \, \exp\left( -\frac{(x - \mu
 
 测试视频<br/>
 《初星学園, Kijibato, 花海咲季 - EGO》<br/>
-PCM封装的MKV源视频，<a href='EGO.mkv' download='初星学園, Kijibato, 花海咲季 - EGO.mkv'>下载</a>
+PCM封装的MKV源视频，[EGO.mkv](https://raw.kkgithub.com/JDBeWL/docs-vite/main/public/EGO.mkv)
 ::: danger
 <video controls width="540" height="540">
   <source src="/public/EGO.mp4" type="video/mp4">
