@@ -10,6 +10,8 @@ head:
       - name: keywords
         content: BlueArchive Python
 ---
+BA Assets解包思路分享，不可用于其他商业用途
+---
 # 关于BlueArchive
 
 《Blue Archive》（碧蓝档案/蔚蓝档案）是由韩国Nexon旗下子公司NAT Games开发、Yostar代理发行的一款二次元风格**角色收集RPG**，主打学园题材与战略战斗玩法。
