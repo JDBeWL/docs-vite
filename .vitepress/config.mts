@@ -101,9 +101,9 @@ export default defineConfigWithTheme<ThemeConfig>({
     ],
 
     //gitalk配置
-    clientID: 'Ov23likWddmETK4i35dd',
-    clientSecret: 'b68c78dde8d7b42fc964ef85bf6c638a7c404043',
-    repo: 'vitepress',
+    clientID: 'Ov23liETKFuI0ag7MmO5',
+    clientSecret: 'a3fc0fb437e4e81977712cd77888b8cecf31010d',
+    repo: 'docs-vite',
     owner: 'JDBeWL',
     admin: ['JDBeWL'],
   },
