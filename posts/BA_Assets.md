@@ -1,14 +1,17 @@
 ---
 title: BA Assets解析
 date: 2025-04-22
-tags: [Python,Json,Base64]
-head: 
-    - - meta
-      - name: description
-        content: 只是关于unity的研究分享，不可用于其他商业用途
-    - - meta
-      - name: keywords
-        content: BlueArchive Python
+tags:
+  - Python
+  - Json
+  - Base64
+head:
+  - - meta
+    - name: description
+      content: 只是关于unity的研究分享，不可用于其他商业用途
+  - - meta
+    - name: keywords
+      content: BlueArchive Python
 ---
 
 BA Assets解析思路分享，不可用于其他商业用途
@@ -44,7 +47,7 @@ BA Assets解析思路分享，不可用于其他商业用途
 
 ## 关于代码
 
-代码来源于[Blue-Archive-Asset-Downloader](https://github.com/ZM-Kimu/Blue-Archive-Asset-Downloader)，请到原作者的仓库star支持作者。
+部分代码来源于[Blue-Archive-Asset-Downloader](https://github.com/ZM-Kimu/Blue-Archive-Asset-Downloader)，请到原作者的仓库star支持作者。
 这里仅仅只是对于作者提供的思路进行对unity工程的逆向分析。
 
 这里使用Python来对下载的Xapk安装包处理，需要安装的依赖包如下
