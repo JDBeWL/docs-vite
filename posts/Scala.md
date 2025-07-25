@@ -26,7 +26,7 @@ head:
 > ~~请确保你的环境变量不要像下面这台电脑被许多软件侵占Path项导致根本不知道能清理什么而污染环境变量~~ 
 
 <p align="center">
-  <img src="../public/wtf_your_environment_variables.png" height="360px">
+  <img src="/wtf_your_environment_variables.png" height="360px">
 </p>
 
 当然你的**Hadoop、Spark、Scala**的**bin**目录需要写入环境变量

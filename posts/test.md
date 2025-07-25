@@ -14,10 +14,10 @@ head:
 # 测试样本
 
 ## HiveQL表
-![Caption](../public/testhql.png)
+![Caption](/testhql.png)
 
 ## 这是阿露
-<img src="/public/ahru.gif" data-fancybox="gallery"/>
+<img src="/ahru.gif" data-fancybox="gallery"/>
 
 ## 芝士正态分布
 正态分布的一般形式
@@ -74,7 +74,7 @@ f(x; \mu, \sigma^2) = \frac{1}{\sigma \sqrt{2\pi}} \, \exp\left( -\frac{(x - \mu
 PCM封装的MKV源视频，[EGO.mkv](https://raw.kkgithub.com/JDBeWL/docs-vite/main/public/EGO.mkv)
 ::: danger
 <video controls width="540" height="540">
-  <source src="/public/EGO.mp4" type="video/mp4">
+  <source src="/EGO.mp4" type="video/mp4">
 </video>
 :::
 
