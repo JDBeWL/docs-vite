@@ -181,6 +181,223 @@ head:
 </html>
 ```
 
+### 更好看的日历
+![更好看的日历](/src/share/betterCalendar.png "更好看的日历")
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>日历</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --accent-color: #f8f9fa;
+            --border-radius: 8px;
+            --transition: all 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #calendar {
+            border: 1px solid #dee2e6;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            font-size: 1.1rem;
+            width: 90%;
+            max-width: 500px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: #fff;
+            transition: var(--transition);
+        }
+
+        #calendar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+
+        #calendar-control {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        #calendar-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #calendar-table thead tr {
+            background-color: #f8f9fa;
+        }
+
+        #calendar-table td, 
+        #calendar-table th {
+            border: 1px solid #dee2e6;
+            text-align: center;
+            padding: 0.5rem;
+            width: calc(100% / 7);
+            transition: var(--transition);
+        }
+
+        #calendar-table td.today {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 2.5rem;
+            height: 2.5rem;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--accent-color);
+            border: 1px solid #ced4da;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        button:hover {
+            background: #e9ecef;
+            transform: scale(1.05);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="calendar">
+        <div id="calendar-control">
+            <button onclick="formatGetTime('prev')"> &lt; </button>
+            <div id="calendar-date">
+
+            </div>
+            <button onclick="formatGetTime('next')"> &gt; </button>
+        </div>
+        <table id="calendar-table">
+            <thead>
+                <tr>
+                    <th>一</th>
+                    <th>二</th>
+                    <th>三</th>
+                    <th>四</th>
+                    <th>五</th>
+                    <th>六</th>
+                    <th>日</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    let calendar = document.getElementById('calendar');
+    // 添加table前从Date对象中拿取必要的值
+    let date = new Date();
+    // 装载时间
+    let year, month, day, week, firstDay, lastDay;
+    function initialTime(date) {
+        year = date.getFullYear();
+        month = date.getMonth();
+        day = date.getDate();
+        week = date.getDay();
+        firstDay = new Date(year, month, 1).getDay();
+        lastDay = new Date(year, month + 1, 0).getDate();
+        nowDate = document.getElementById('calendar-date');
+        nowDate.textContent = `${year}年${month + 1}月`;
+    }
+    // 使用date初始化calendar
+    initialTime(date);
+
+    // 往calendar添加table
+    function addCalendar(firstDay, lastDay) {
+        let table = document.getElementById('calendar-table');
+        let tbody = table.getElementsByTagName('tbody')[0];
+        let space = firstDay === 0 ? 6 : firstDay - 1;
+        let row = Math.ceil((space + lastDay) / 7);
+        let col = 7;
+        let insertDay = 1;
+        let today = new Date();
+        let nowYear = today.getFullYear();
+        let nowMonth = today.getMonth();
+        let nowDay = today.getDate();
+        for (let i = 1; i <= row; i++) {
+            let tr = document.createElement("tr");
+            for (let j = 1; j <= col; j++) {
+                let td = document.createElement("td");
+                if (i == 1 && j <= space) {
+                    tr.append(td);
+                } else {
+                    if (insertDay <= lastDay) {
+                        td.textContent = insertDay;
+                        if (year == nowYear && month == nowMonth && insertDay == nowDay) {
+                            td.style.backgroundColor = 'grey';
+                            td.style.color = 'red';
+                        }
+                        insertDay++;
+                    }
+                    tr.append(td);
+                }
+            }
+            tbody.append(tr);
+        }
+    }
+
+    // 初始化默认值为当前月份的日历
+    addCalendar(firstDay, lastDay);
+
+    // 日历操作
+    function formatGetTime(type) {
+        switch (type) {
+            case 'prev':
+                let prevDate = new Date(year, month - 1, 1);
+                initialTime(prevDate);
+                deleteCalendar();
+                addCalendar(firstDay, lastDay);
+                break;
+            case 'next':
+                let nextDate = new Date(year, month + 1, 1);
+                initialTime(nextDate);
+                deleteCalendar();
+                addCalendar(firstDay, lastDay);
+                break;
+        }
+    }
+
+    // 清空日历
+    function deleteCalendar() {
+        let tbody = calendar.getElementsByTagName('tbody')[0];
+        let rows = calendar.querySelectorAll('tr');
+        for (let i = rows.length - 1; i >= 1; i--) {
+            rows[i].remove();
+        }
+    }
+
+
+</script>
+
+</html>
+```
+
 ### 倒计时
 ![倒计时](/src/share/countdown.png "倒计时")
 ```html
