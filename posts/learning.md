@@ -14,9 +14,13 @@ head:
 
 # 笔记
 
+---
+
 ::: tip
 只是在学习的时候写的东西，推荐使用搜索功能搜索想到的笔记
 :::
+
+
 
 ## HTML
 
@@ -780,3 +784,202 @@ head:
 
 </html>
 ```
+
+---
+
+## MySQL
+
+### student表的增删改查备份
+
+```sql
+创建一张学生表，包含以下信息，学号，姓名，年龄，性别，联系电话,学历,出生日期
+
+create table student(
+    stu_id int primary key not null,
+    stu_name varchar(10) not null,
+    stu_age int not null,
+    stu_gender char(2) not null,
+    stu_phone_num varchar(11),
+    stu_education varchar(10) not null,
+    stu_birthdate date
+)engine=innodb default charset=utf8;
+
+向学生表添加如下信息：
+学号 姓名 年龄 性别 联系电话 学历 出生日期
+1 A张三 22 男 123456 小学 1993-09-09
+2 B李四 21 男 119 中学 1994-09-01
+3 C王五 23 男 150 高中 1992-04-22
+4 D赵六 18 女 120 大学 1995-01-28
+5 E孙七 17 女 911 大专 1996-01-28
+6 C郑八 24 男 12580 中专 1990-01-28
+
+insert into student values
+(1,"A张三",22,"男","123456","小学","1993-09-09"),
+(2,"B李四",21,"男","119","中学","1994-09-01"),
+(3,"C王五",23,"男","150","高中","1992-04-22"),
+(4,"D赵六",18,"女","120","大学","1995-01-28"),
+(5,"E孙七",17,"女","911","大专","1996-01-28"),
+(6,"C郑八",24,"男","12580","中专","1990-01-28");
+
+
+> 学号不一定是自增可以判断的，正常的学号是数字拼接出来的。
+
+修改学生表的数据，将电话号码以11开头的学员的学历改为“大专”
+update student set stu_education="大专" where stu_phone_num like '11%';
+
+删除学生表的数据，姓名以C开头，性别为‘男‘的记录删除 and
+delete from student where stu_name like 'C%' and stu_gender = '男';
+
+将所有年龄小于22岁的，学历为“大专”的学生的电话删除 ：将电话设置为null
+update student set stu_phone_num = null where stu_education='大专';
+
+修改C开头，并且学历为高中的学生出生日期为2013-09-18
+update student set stu_birthdate = '2013-09-18' where stu_education='高中' and stu_name like 'C%';
+
+备份当前修改完成的表到t_student_bak表中
+create table t_student_bak as select * from student;
+这种方式复制, 基本结构, 数据能复制过来
+
+删除出生日期在（1990年-1992年，包括1990以及1992年）的学生信息
+delete from student where stu_birthdate between '1990-01-01' and '1992-12-31';
+
+添加一名未知电话的同学“ccf”
+insert into student values(7,"ccf",21,"男",NULL,"小学","1991-01-02");
+
+修改ccf同学的出生年月为1924-08-08
+update student set stu_birthdate = '1924-08-08' where stu_name = 'ccf';
+```
+
+---
+
+### day02
+
+**商品类别表**
+
+```sql
+CREATE TABLE category(
+cat_id INT PRIMARY KEY AUTO_INCREMENT,#类别编号
+cat_name VARCHAR(30) NOT NULL#类别名称
+);
+```
+
+**商品表**
+
+```sql
+CREATE TABLE goods(
+goods_id INT PRIMARY KEY AUTO_INCREMENT,#商品编号
+goods_name VARCHAR(30) NOT NULL,#商品名称
+goods_price DOUBLE,#商品进价
+shop_price DOUBLE,#商品卖价
+market_price DOUBLE,#市场价
+cat_id INT,#商品类别
+goods_number INT,#商品数量
+FOREIGN KEY(cat_id) REFERENCES category(cat_id)
+);
+```
+
+**插入数据**
+
+```sql
+INSERT INTO category(cat_name) VALUES('航模'),('车模'),('船模');
+INSERT INTO category(cat_name) VALUES('动物模型');
+INSERT INTO goods
+(goods_name,goods_price,shop_price,market_price,cat_id,goods_number)
+VALUES('F16战斗机',300,1000,900,1,120);
+INSERT INTO goods
+(goods_name,goods_price,shop_price,market_price,cat_id,goods_number)
+VALUES('F35战斗机',400,1200,1000,1,210);
+INSERT INTO goods
+(goods_name,goods_price,shop_price,market_price,cat_id,goods_number)
+VALUES('F117隐形轰炸机',290,800,600,1,99);
+INSERT INTO goods
+(goods_name,goods_price,shop_price,market_price,cat_id,goods_number)
+VALUES('牧马人',120,600,500,2,1200);
+INSERT INTO goods
+(goods_name,goods_price,shop_price,market_price,cat_id,goods_number)
+VALUES('宝马Z4',130,560,510,2,231);
+INSERT INTO goods
+(goods_name,goods_price,shop_price,market_price,cat_id,goods_number)
+VALUES('地中海帆船',90,300,180,3,68);
+INSERT INTO goods
+(goods_name,goods_price,shop_price,market_price,cat_id,goods_number)
+VALUES('密西西比号蒸汽明轮',100,560,520,3,114);
+INSERT INTO goods
+(goods_name,goods_price,shop_price,market_price,cat_id,goods_number)
+VALUES('德鲁伊号16门炮护卫舰',1322,2322,2600,3,100);
+INSERT INTO goods
+(goods_name,goods_price,shop_price,market_price,cat_id,goods_number)
+VALUES('皇家理查德号 74门炮战舰',350,800,769,3,312);
+```
+
+**方法**
+```sql
+## 1求每个类别下商品种类数
+select c.cat_name '商品种类',count(g.cat_id) '数量'
+from category c
+left join goods g on c.cat_id = g.cat_id
+group by c.cat_name;
+## 2查询本店每个商品价格比市场价低多少；
+select goods_name '商品名',market_price-shop_price '市场价格差距' 
+from goods 
+where  market_price > shop_price;
+## 3查询每个类别下面积压的货款
+select c.cat_name '商品种类', sum(g.goods_number*g.goods_price) '积压货款'
+from goods g, category c
+where g.cat_id = c.cat_id
+group by c.cat_name;
+## 4查询本店商品价格比市场价低多少钱，输出低200元以上的商品
+select goods_name '商品名',market_price-shop_price '市场价格差距' 
+from goods
+where market_price-shop_price > 200;
+## 5查询积压货款超过2万元的栏目，以及该栏目积压的货款
+select goods_name '商品名', goods_number '商品数量', sum(goods_number * goods_price)  '积压货款'
+from goods g
+group by g.goods_name, g.goods_number
+having sum(g.goods_number * g.goods_price) > 20000;
+## 6按类别号升序排列，每个类别下的商品进价降序排列
+select *
+from goods
+order by cat_id ASC,goods_price DESC;
+## 7取价格第1-6高的商品
+select * from goods order by market_price DESC limit 6;
+## 8查询每个类别下进价最高的商品
+select cat_name '商品种类',g.goods_name '商品名称',g.goods_price '进价价格'
+from category c,goods g,
+(select cat_id,max(goods_price) max_price 
+from goods 
+group by cat_id)t
+where t.cat_id = c.cat_id and t.max_price = g.goods_price;
+## 9取出每个类别下最新的产品(goods_id唯一)
+select distinct cat_name '商品种类',g.goods_name '商品名称'
+from category c,goods g,
+(select cat_id,max(goods_id) goods_id
+from goods 
+group by cat_id)t
+where t.cat_id = c.cat_id and t.goods_id = g.goods_id;
+## 10.查询没有商品的商品类别
+select cat_name '商品种类'
+from category c
+where not exists(select * from goods g where g.cat_id = c.cat_id);
+## 11.查询超过最高卖价航模的商品有哪些商品？
+select distinct goods_name '商品名称',shop_price '市场价格'
+from goods g,category c
+where shop_price > (
+select max(shop_price)
+from goods g,category c
+where cat_name = '航模' and g.cat_id = c.cat_id);
+## 12.查询每个商品类别的商品总数超过500个的商品类别有哪些？
+select cat_name '商品类别',sum(goods_number) '数量'
+from goods g,category c
+where g.cat_id = c.cat_id
+group by cat_name
+having sum(goods_number) > 500;
+## 13.查询商品进价低于100的商品类别有哪些？
+select cat_name '商品类别',goods_price '价格',goods_id
+from goods g,category c
+where g.cat_id = c.cat_id and goods_price < 100;
+```
+
+
+> 被大雨压力了，有些题有更简单的方法能查到，but it just works。
+
